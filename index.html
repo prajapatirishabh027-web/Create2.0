@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet" />
+  <title>A Special Moment For You</title>
+  <style>
+    :root {
+      --bg: #fff5f7;
+      --bg-grad: radial-gradient(circle at top, #ffe4e6 0%, #fff5f7 65%);
+      --card: rgba(255, 255, 255, 0.96);
+      --primary: #e11d48;
+      --primary-soft: #ffe4e6;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #fecdd3;
+    }
+
+    body[data-theme="apology"] {
+      --bg: #eff6ff;
+      --bg-grad: radial-gradient(circle at top, #dbeafe 0%, #eff6ff 65%);
+      --primary: #2563eb;
+      --primary-soft: #dbeafe;
+      --border: #bfdbfe;
+    }
+    body[data-theme="girlfriend"] {
+      --bg: #fff1f5;
+      --bg-grad: radial-gradient(circle at top, #ffe4e6 0%, #fff1f5 65%);
+      --primary: #e11d48;
+      --primary-soft: #ffe4e6;
+      --border: #fecdd3;
+    }
+    body[data-theme="surprise"] {
+      --bg: #fdf4ff;
+      --bg-grad: radial-gradient(circle at top, #fae8ff 0%, #fdf4ff 65%);
+      --primary: #c026d3;
+      --primary-soft: #fae8ff;
+      --border: #f5d0fe;
+    }
+    body[data-theme="birthday"] {
+      --bg: #fffbeb;
+      --bg-grad: radial-gradient(circle at top, #fef3c7 0%, #fffbeb 65%);
+      --primary: #d97706;
+      --primary-soft: #fef3c7;
+      --border: #fde68a;
+    }
+    body[data-theme="friendship"] {
+      --bg: #f0fdf4;
+      --bg-grad: radial-gradient(circle at top, #d1fae5 0%, #f0fdf4 65%);
+      --primary: #059669;
+      --primary-soft: #d1fae5;
+      --border: #a7f3d0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      touch-action: manipulation;
+      background: var(--bg);
+      background-image: var(--bg-grad);
+      color: var(--text);
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.4s ease;
+      overflow-x: hidden;
+    }
+
+    h1, h2, .serif {
+      font-family: "Fraunces", Georgia, "Times New Roman", serif;
+      font-weight: 700;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 440px;
+      padding: 18px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 26px;
+      padding: 26px 22px;
+      box-shadow: 0 24px 50px -15px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--border);
+      position: relative;
+      animation: roomEnter 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes roomEnter {
+      from { opacity: 0; transform: translateY(14px) scale(0.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .room {
+      animation: roomEnter 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px 18px;
+      border: none;
+      border-radius: 14px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      transition: transform 0.14s ease, opacity 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 8px 20px -6px var(--primary);
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-secondary {
+      background: var(--primary-soft);
+      color: var(--primary);
+      box-shadow: none;
+    }
+    .btn-sm { padding: 10px 14px; font-size: 13px; border-radius: 11px; width: auto; }
+
+    label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      margin: 14px 0 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 11px 13px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      font-family: inherit;
+      font-size: 14px;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    input:focus, textarea:focus, select:focus { border-color: var(--primary); }
+
+    .mode-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .mode-pill {
+      padding: 9px 4px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      background: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    .mode-pill.active {
+      background: var(--primary-soft);
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .gif-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .gif-thumb {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      background: var(--primary-soft);
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+    .gif-thumb.selected { border-color: var(--primary); transform: scale(0.95); }
+
+    .progress-bar {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 18px;
+    }
+    .progress-dot {
+      flex: 1;
+      height: 4px;
+      border-radius: 99px;
+      background: var(--primary-soft);
+      transition: background 0.35s ease;
+    }
+    .progress-dot.done { background: var(--primary); }
+
+    .audio-fab {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 7px 13px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      display: none;
+    }
+
+    .brass-ring {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      border: 5px solid var(--primary);
+      margin: 22px auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      cursor: pointer;
+      background: #fff;
+      box-shadow: 0 0 0 10px var(--primary-soft);
+      transition: transform 0.12s ease;
+      animation: gentlePulse 2.2s infinite ease-in-out;
+      user-select: none;
+    }
+    .brass-ring:active { transform: scale(0.91); }
+    @keyframes gentlePulse {
+      0%, 100% { box-shadow: 0 0 0 8px var(--primary-soft); }
+      50% { box-shadow: 0 0 0 15px var(--primary-soft); }
+    }
+    .knock-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .knock-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--primary-soft);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .knock-dot.lit { background: var(--primary); transform: scale(1.25); }
+
+    .ritual-stage {
+      padding: 14px 0 6px;
+      min-height: 170px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 18px;
+      position: relative;
+      width: 100%;
+      height: 54px;
+    }
+    #dodgeBtn {
+      position: relative;
+      transition: transform 0.16s cubic-bezier(0.34, 1.56, 0.64, 1);
+      will-change: transform;
+    }
+
+    .scratch-wrap {
+      position: relative;
+      width: 100%;
+      height: 235px;
+      border-radius: 18px;
+      overflow: hidden;
+      margin: 14px 0;
+      background: var(--primary-soft);
+      border: 1.5px solid var(--border);
+      user-select: none;
+    }
+    .scratch-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    #scratchCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+      cursor: grab;
+      transition: opacity 0.45s ease;
+    }
+
+    .pz-stage { position: relative; width: 100%; max-width: 330px; margin: 14px auto 8px; touch-action: none; user-select: none; -webkit-user-select: none; }
+    .pz-board { width: 100%; aspect-ratio: 1; border-radius: 16px; border: 2px dashed var(--primary); background: var(--primary-soft); }
+    .pz-piece { position: absolute; left: 0; top: 0; z-index: 2; cursor: grab; transition: transform .32s cubic-bezier(.34, 1.4, .5, 1); }
+    .pz-piece.dragging { transition: none; z-index: 20; cursor: grabbing; }
+    .pz-in { width: 100%; height: 100%; border-radius: 6px; box-shadow: 0 0 0 1px rgba(255,255,255,.9), 0 3px 8px rgba(0,0,0,.16); transition: transform .15s ease, box-shadow .15s ease; }
+    .pz-piece.sel .pz-in { transform: scale(.9) rotate(-2deg); box-shadow: 0 0 0 3px var(--primary), 0 8px 16px rgba(0,0,0,.25); }
+    .pz-piece.dragging .pz-in { transform: scale(1.08) rotate(3deg); }
+    .pz-lost { visibility: hidden; z-index: 30; }
+    .pz-lost.shown { visibility: visible; }
+    .pz-lost.fly { transition: transform 2.4s cubic-bezier(.16, .84, .3, 1); }
+    .pz-lost.shown:not(.fit) .pz-in { animation: pzBob 1.6s ease-in-out infinite; box-shadow: 0 0 0 3px var(--primary), 0 0 26px 6px var(--primary); }
+    .pz-lost.dragging .pz-in { animation: none; }
+    @keyframes pzBob { 50% { transform: translateY(-7px) rotate(3deg); } }
+    .pz-hole { position: absolute; left: 0; top: 0; z-index: 1; border: 3px dashed var(--primary); border-radius: 8px; background: var(--primary-soft); opacity: 0; pointer-events: none; transition: opacity .4s; }
+    .pz-hole.on { opacity: 1; animation: holePulse 1s ease-in-out infinite; }
+    @keyframes holePulse { 50% { background: #fff; } }
+    .pz-peek { position: absolute; left: 0; top: 0; z-index: 25; border-radius: 16px; background-size: cover; background-position: center; opacity: 0; pointer-events: none; transition: opacity .2s; }
+    .pz-peek.on { opacity: 1; }
+    .pz-hint { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--muted); transition: opacity .5s; pointer-events: none; }
+
+    .notes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 16px 0;
+    }
+    .note-card {
+      background: var(--primary-soft);
+      border: 1.5px dashed var(--primary);
+      border-radius: 16px;
+      padding: 16px 12px;
+      text-align: center;
+      cursor: pointer;
+      min-height: 108px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      transition: transform 0.2s ease, background 0.25s ease;
+    }
+    .note-card:active { transform: scale(0.96); }
+    .note-card.opened {
+      background: #fff;
+      border-style: solid;
+      color: var(--text);
+      font-weight: 500;
+      line-height: 1.45;
+      animation: popReveal 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes popReveal {
+      from { transform: scale(0.88); }
+      to { transform: scale(1); }
+    }
+
+    .envelope-box {
+      background: var(--primary-soft);
+      border-radius: 20px;
+      padding: 28px 20px;
+      text-align: center;
+      margin: 14px 0;
+      border: 1.5px dashed var(--primary);
+    }
+    .wax-seal {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      font-size: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 12px auto 4px;
+      cursor: pointer;
+      box-shadow: 0 10px 24px -4px var(--primary);
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .wax-seal:hover { transform: scale(1.08) rotate(-4deg); }
+    .wax-seal:active { transform: scale(0.92); }
+    .letter-paper {
+      background: #fff;
+      padding: 20px;
+      border-radius: 16px;
+      text-align: left;
+      line-height: 1.65;
+      font-size: 15px;
+      white-space: pre-wrap;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.03);
+      animation: roomEnter 0.4s ease;
+    }
+
+    .promise-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      background: var(--primary-soft);
+      border-radius: 12px;
+      margin-bottom: 8px;
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--text);
+    }
+    .promise-item input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+      margin: 0;
+      flex-shrink: 0;
+    }
+    #sigPad {
+      width: 100%;
+      height: 105px;
+      border: 1.5px dashed var(--primary);
+      border-radius: 14px;
+      background: #fff;
+      touch-action: none;
+      margin-top: 6px;
+      display: block;
+    }
+
+    .container { position: relative; z-index: 1; }
+    #fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 60; }
+    #floaters { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+    #floaters span { position: absolute; bottom: -40px; opacity: .55; animation: floatUp linear infinite; }
+    @keyframes floatUp { to { transform: translateY(-115vh) rotate(40deg); } }
+    .btn:disabled { opacity: .45; pointer-events: none; box-shadow: none; }
+    .brass-ring.shake { animation: shake .35s ease, gentlePulse 2.2s infinite ease-in-out; }
+    @keyframes shake { 25% { transform: rotate(-14deg) scale(1.08); } 75% { transform: rotate(14deg) scale(1.08); } }
+    .wax-seal { animation: wiggle 1.8s ease-in-out infinite; }
+    @keyframes wiggle { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg) scale(1.06); } }
+    #cakeIcon, #bandIcon { animation: bob 1.8s ease-in-out infinite; }
+    @keyframes bob { 50% { transform: translateY(-8px); } }
+    .note-card { animation: popReveal .45s cubic-bezier(.34, 1.56, .64, 1) both; }
+    .gal-nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 8px 0 14px; font-weight: 700; color: var(--muted); font-size: 13px; }
+    #peekBtn { user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+    @media (prefers-reduced-motion: reduce) { #floaters { display: none; } * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+    .gallery-wall { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 12px; margin: 16px 0; }
+    .gallery-wall.one { grid-template-columns: 1fr; max-width: 240px; margin-left: auto; margin-right: auto; }
+    .polaroid { background: #fff; padding: 8px 8px 6px; border-radius: 6px; box-shadow: 0 10px 22px -8px rgba(0,0,0,.3); transform: rotate(var(--r)); cursor: pointer; animation: popReveal .5s cubic-bezier(.34, 1.56, .64, 1) both; transition: transform .2s ease; }
+    .polaroid:active { transform: rotate(0deg) scale(1.04); }
+    .polaroid img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; border-radius: 2px; background: var(--primary-soft); }
+    .polaroid figcaption { font-family: "Fraunces", Georgia, serif; font-size: 12px; text-align: center; margin-top: 6px; min-height: 16px; }
+    #lightbox { position: fixed; inset: 0; z-index: 70; background: rgba(0,0,0,.84); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 20px; }
+    #lightbox img { max-width: 100%; max-height: 76vh; border-radius: 10px; }
+    #lightbox p { color: #fff; font-family: "Fraunces", Georgia, serif; font-size: 16px; text-align: center; }
+
+    #memCanvas { width: 100%; max-width: 270px; aspect-ratio: 9 / 16; border-radius: 14px; display: block; margin: 12px auto 0; box-shadow: 0 12px 28px -10px rgba(0,0,0,.35); }
+    details > summary { cursor: pointer; font-size: 13px; font-weight: 800; color: var(--primary); margin-top: 6px; }
+    #lineList input, #lineList textarea { margin: 0; }
+
+    .hidden { display: none !important; }
+    .center { text-align: center; }
+    .subtitle { color: var(--muted); font-size: 14px; margin-top: 6px; line-height: 1.5; }
+  </style>
+</head>
+<body data-theme="girlfriend">
+  <canvas id="fx"></canvas>
+  <div id="floaters"></div>
+  <div id="lightbox" class="hidden" onclick="this.classList.add('hidden')"><img id="lbImg" alt="" /><p id="lbCap"></p></div>
+
+  <button id="audioFab" class="audio-fab" type="button" onclick="toggleAudio()">🔊 Music On</button>
+
+  <div class="container">
+    <!-- ==================== CREATOR STUDIO (OWNER ONLY) ==================== -->
+    <div id="creatorView" class="card hidden">
+      <div class="center">
+        <h1 style="font-size: 30px;">OurMoments Studio ✨</h1>
+        <p class="subtitle">Blends all 5 experiences into one seamless interactive walkthrough. Recipients never see category labels or the builder.</p>
+      </div>
+
+      <label>1. Palette & Starter Preset</label>
+      <div class="mode-grid" id="modeSelector">
+        <div class="mode-pill" data-mode="apology" onclick="selectMode('apology')">🥺 Sorry</div>
+        <div class="mode-pill active" data-mode="girlfriend" onclick="selectMode('girlfriend')">💞 Love</div>
+        <div class="mode-pill" data-mode="surprise" onclick="selectMode('surprise')">❤️ Surprise</div>
+        <div class="mode-pill" data-mode="birthday" onclick="selectMode('birthday')">🎂 B-Day</div>
+        <div class="mode-pill" data-mode="friendship" onclick="selectMode('friendship')">💚 Bestie</div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div>
+          <label>Their Name</label>
+          <input type="text" id="toName" placeholder="e.g. Riya" maxlength="30" />
+        </div>
+        <div>
+          <label>Your Name</label>
+          <input type="text" id="fromName" placeholder="e.g. Aarav" maxlength="30" />
+        </div>
+      </div>
+
+      <label>2. Background Song (Zero-Lag Built-in Synth)</label>
+      <select id="songSelect">
+        <option value="piano">🎹 Soft Romantic Melody</option>
+        <option value="musicbox">✨ Dreamy Music Box</option>
+        <option value="celebrate">🎂 Warm Celebration Chimes</option>
+        <option value="none">🔇 Silent Mode</option>
+      </select>
+
+      <label>3. Memory Photos (up to 6): scratched open one by one, shown as a gallery, one becomes the puzzle</label>
+      <input type="url" id="mediaUrl" placeholder="Photo 1 URL, or tap a preset below" />
+      <input type="text" id="cap1" placeholder="Caption for photo 1 (optional)" maxlength="40" style="margin-top:6px;" />
+      <div class="gif-grid" id="gifPresets">
+        <img class="gif-thumb selected" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" onclick="pickGif(this)" alt="Cute hug" />
+        <img class="gif-thumb" src="https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif" onclick="pickGif(this)" alt="Floating hearts" />
+        <img class="gif-thumb" src="https://media.giphy.com/media/l4pTdcifPZLpDjL1e/giphy.gif" onclick="pickGif(this)" alt="Puppy eyes" />
+        <img class="gif-thumb" src="https://media.giphy.com/media/g5R9dok94mrIvplmZd/giphy.gif" onclick="pickGif(this)" alt="Birthday wishes" />
+      </div>
+      <div id="extraPhotos"></div>
+      <input type="file" accept="image/*" multiple onchange="addLocalPhoto(this)" style="margin-top:8px;" />
+      <p id="uploadNote" style="font-size:11px; color:var(--muted); margin-top:4px;"></p>
+      <details>
+        <summary>⚙️ Photo hosting settings (Cloudinary)</summary>
+        <input type="text" id="cldCloud" placeholder="Cloud name" style="margin-top:6px;" oninput="saveCld()" autocapitalize="none" autocomplete="off" />
+        <input type="text" id="cldPreset" placeholder="Upload preset name (must be Unsigned)" style="margin-top:6px;" oninput="saveCld()" autocapitalize="none" autocomplete="off" />
+        <p style="font-size:11px; color:var(--muted); margin-top:4px;">Cloudinary → Settings → Upload → Upload presets → copy the Name. Saved on this phone, no redeploy needed.</p>
+      </details>
+      <select id="puzzleSel" style="margin-top:8px;">
+        <option value="0">🧩 Puzzle uses photo 1</option>
+        <option value="1">🧩 Puzzle uses photo 2</option>
+        <option value="2">🧩 Puzzle uses photo 3</option>
+        <option value="3">🧩 Puzzle uses photo 4</option>
+        <option value="4">🧩 Puzzle uses photo 5</option>
+        <option value="5">🧩 Puzzle uses photo 6</option>
+      </select>
+
+      <label>4. Interactive Prompt & Ritual</label>
+      <input type="text" id="questionText" value="Do you know how much I adore you? 💕" maxlength="90" />
+      <select id="ritualSelect" style="margin-top:8px;">
+        <option value="dodge">💕 Playful Yes / Dodging "No" Button</option>
+        <option value="cake">🎂 Make a Wish & Blow Out Candle</option>
+        <option value="band">🤝 Tie Virtual Friendship / Promise Band</option>
+      </select>
+
+      <label>5. Four Tappable Memory Notes</label>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+        <input type="text" id="note1" value="In your smile I found peace" maxlength="70" />
+        <input type="text" id="note2" value="Every ordinary day feels special" maxlength="70" />
+        <input type="text" id="note3" value="You are my favorite person" maxlength="70" />
+        <input type="text" id="note4" value="Here is to all our tomorrows" maxlength="70" />
+      </div>
+
+      <label>6. Wax-Sealed Letter</label>
+      <textarea id="letterText" rows="3" maxlength="500">From the moment you walked into my life, everything became brighter. Thank you for being my safe place and my favorite adventure.</textarea>
+
+      <label>7. Promises to Tick & Sign (Comma separated)</label>
+      <input type="text" id="promisesText" value="Never stop making you smile, Always be in your corner, Hold your hand through everything" />
+
+      <label>8. Edit Every Line</label>
+      <details>
+        <summary>✏️ Change any heading, line or button</summary>
+        <button class="btn btn-sm btn-secondary" type="button" style="margin-top:8px;" onclick="resetLines()">↺ Reset all lines</button>
+        <div id="lineList"></div>
+      </details>
+
+      <div style="margin-top: 18px;">
+        <button class="btn" type="button" onclick="generateShareLink()">🔗 Generate Private Link</button>
+      </div>
+
+      <div id="shareResult" class="hidden" style="margin-top: 14px; padding: 14px; background: var(--primary-soft); border-radius: 14px;">
+        <p style="font-size:12px; font-weight:700; color:var(--primary); margin-bottom:8px;">Ready to send (100% private recipient view):</p>
+        <input type="text" id="finalLink" readonly style="font-size:12px; margin-bottom:10px;" />
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-sm" type="button" style="flex:1;" onclick="copyShareLink()">📋 Copy Link</button>
+          <button class="btn btn-sm btn-secondary" type="button" style="flex:1;" onclick="previewExperience()">👁 Preview</button>
+        </div>
+        <p id="shareNote" style="font-size:12px; color:var(--muted); margin-top:8px;"></p>
+      </div>
+    </div>
+
+    <!-- ==================== RECIPIENT WALKTHROUGH (NO LABELS, NO BUILDER) ==================== -->
+    <div id="recipientView" class="card hidden">
+      <div class="progress-bar" id="progressBar">
+        <div class="progress-dot done"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+      </div>
+
+      <!-- ROOM 1: KNOCK 3 TIMES GATEKEEPER -->
+      <div id="room1" class="room center">
+        <p style="font-size:11px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase;">One Visitor Only</p>
+        <h1 id="r1Title" style="font-size: 34px; margin-top: 4px;">For You</h1>
+        <p class="subtitle">Someone built a small world just for you. Knock three times on the ring to step inside.</p>
+        <div class="brass-ring" id="brassRing" onclick="handleKnock()">💌</div>
+        <div class="knock-dots">
+          <span class="knock-dot" id="kd1"></span>
+          <span class="knock-dot" id="kd2"></span>
+          <span class="knock-dot" id="kd3"></span>
+        </div>
+        <p id="knockHint" style="font-size:12px; color:var(--muted);">Tap 3 times (0 / 3)</p>
+      </div>
+
+      <!-- ROOM 2: INTERACTIVE RITUAL -->
+      <div id="room2" class="room hidden center">
+        <h2 style="font-size: 27px;">Before We Walk Further…</h2>
+        <p id="r2Sub" class="subtitle"></p>
+        <div class="ritual-stage" id="ritualArea"></div>
+      </div>
+
+      <!-- ROOM 3: SCRATCH TO REVEAL MEMORY / GIF -->
+      <div id="room3" class="room hidden center">
+        <h2 style="font-size: 27px;">A Hidden Memory</h2>
+        <p class="subtitle">Rub your finger across the foil to uncover what is waiting underneath.</p>
+        <div class="scratch-wrap">
+          <img id="scratchImg" src="" alt="Memory" />
+          <canvas id="scratchCanvas"></canvas>
+        </div>
+        <p id="photoCap" class="serif" style="font-size:17px; min-height:24px;"></p>
+        <div class="gal-nav" id="galNav">
+          <button class="btn btn-sm btn-secondary" type="button" onclick="showPhoto(photoIdx - 1)">←</button>
+          <span id="photoCount">1 / 1</span>
+          <button class="btn btn-sm btn-secondary" type="button" onclick="showPhoto(photoIdx + 1)">→</button>
+        </div>
+        <button class="btn" type="button" onclick="goRoom(4)">Keep Walking →</button>
+      </div>
+
+      <!-- ROOM 4: 3x3 RESTORATION PUZZLE -->
+      <div id="room4" class="room hidden center">
+        <h2 style="font-size: 27px;">Put The Pieces Together</h2>
+        <p class="subtitle">Tap two pieces to swap them, or drag one where it belongs. One piece has wandered off…</p>
+        <div class="pz-stage" id="pzStage"><div class="pz-board"></div><div class="pz-hint" id="pzHint">🫣 someone is hiding a piece…</div></div>
+        <p id="puzzleStatus" style="font-size:13px; color:var(--muted); margin-bottom:12px;">Moves: 0</p>
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-secondary" type="button" id="peekBtn">👁 Hold to peek</button>
+          <button class="btn btn-secondary" type="button" onclick="solvePuzzleInstant()">Solve for me</button>
+        </div>
+        <button class="btn" type="button" id="pzNext" style="margin-top:10px;" disabled onclick="goRoom(5)">Next Room →</button>
+      </div>
+
+      <!-- ROOM 5: PHOTO GALLERY / COLLAGE -->
+      <div id="room5" class="room hidden center">
+        <h2 style="font-size: 27px;">Our Little Gallery</h2>
+        <p class="subtitle">Tap any photo to see it big.</p>
+        <div class="gallery-wall" id="galleryWall"></div>
+        <button class="btn btn-secondary" type="button" id="collageBtn" style="margin-bottom:10px;" onclick="saveCollage()">⬇ Save the collage</button>
+        <button class="btn" type="button" onclick="goRoom(6)">Next Room →</button>
+      </div>
+
+      <!-- ROOM 6: TAPPABLE NOTE WALL -->
+      <div id="room6" class="room hidden center">
+        <h2 style="font-size: 27px;">Little Things To Remember</h2>
+        <p class="subtitle">Tap each card to pop it open.</p>
+        <div class="notes-grid" id="notesContainer"></div>
+        <button class="btn" type="button" onclick="goRoom(7)">Open The Letter →</button>
+      </div>
+
+      <!-- ROOM 6: WAX SEALED LETTER -->
+      <div id="room7" class="room hidden center">
+        <h2 style="font-size: 27px;">Sealed Just For You</h2>
+        <div id="sealPrompt" class="envelope-box">
+          <p class="subtitle" style="margin-bottom:8px;">Tap the wax seal to break it open</p>
+          <div class="wax-seal" onclick="breakSeal()">💌</div>
+        </div>
+        <div id="letterReveal" class="hidden">
+          <div class="letter-paper" id="finalLetterBody"></div>
+          <p id="letterSignOff" style="text-align:right; font-weight:700; margin:12px 0 18px; color:var(--primary);"></p>
+          <button class="btn" type="button" onclick="goRoom(8)">One Last Step →</button>
+        </div>
+      </div>
+
+      <!-- ROOM 7: PROMISES & SIGNATURE -->
+      <div id="room8" class="room hidden center">
+        <h2 style="font-size: 27px;">Seal It Together</h2>
+        <p class="subtitle">Tick each promise and sign below with your finger.</p>
+        <div id="promisesContainer" style="text-align:left; margin:14px 0;"></div>
+        <canvas id="sigPad"></canvas>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin:6px 0 14px;">
+          <span style="font-size:12px; color:var(--muted);">Sign with your finger above</span>
+          <button class="btn-sm btn-secondary" type="button" style="border:none; cursor:pointer;" onclick="clearSig()">Clear</button>
+        </div>
+        <button class="btn" type="button" id="lockBtn" onclick="completeKeepsake()">✨ Lock This Memory</button>
+        <div id="keepsakeDone" class="hidden" style="margin-top:16px; padding:18px; background:var(--primary-soft); border-radius:16px; animation: popReveal 0.35s ease;">
+          <h3 class="serif" style="font-size:24px; color:var(--primary);">Sealed Forever 💖</h3>
+          <p id="keepsakeSummary" style="font-size:13px; margin-top:6px; line-height:1.5;"></p>
+          <canvas id="memCanvas" class="hidden"></canvas>
+          <button class="btn" type="button" id="memBtn" style="margin-top:12px;" onclick="makeMemory()">🎬 Create my animated memory</button>
+          <a class="btn hidden" id="memDl" style="display:block; margin-top:10px; text-decoration:none; text-align:center;">⬇ Download memory</a>
+          <p id="memStatus" style="font-size:12px; color:var(--muted); margin-top:8px;"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* Photo hosting for phone uploads (free Cloudinary account, "unsigned" upload preset).
+       Fill in both values so photos from a phone go into the shared link. */
+    const CLOUDINARY = { cloud: 'zxjlhgbo', preset: 'zxjlhgbo' };
+
+    const MODE_PRESETS = {
+      apology: {
+        ritual: 'dodge',
+        question: "Will you forgive me? 🥺",
+        notes: ["I hate that I hurt you", "You mean everything to me", "I promise to listen and do better", "Can we make things right?"],
+        letter: "I said and did things I deeply regret. You deserve patience, kindness, and respect. Please give me a chance to make this right.",
+        promises: "Listen before reacting, Never take you for granted, Always choose us"
+      },
+      girlfriend: {
+        ritual: 'dodge',
+        question: "Do you know how much I adore you? 💕",
+        notes: ["In your smile I found peace", "Every ordinary day feels special", "You are my favorite person", "Here is to all our tomorrows"],
+        letter: "From the moment you walked into my life, everything became brighter. Thank you for being my safe place and my best adventure.",
+        promises: "Never stop making you smile, Always be in your corner, Hold your hand through everything"
+      },
+      surprise: {
+        ritual: 'dodge',
+        question: "Will you say yes to a surprise with me? ❤️",
+        notes: ["Something special is planned", "Just you and me", "Get ready to smile", "Counting down the moments"],
+        letter: "I couldn't wait for a special occasion to remind you how incredible you are. Consider this your official pass to a memorable day.",
+        promises: "Show up with a smile, Let you pick the dessert, Make memories all day"
+      },
+      birthday: {
+        ritual: 'cake',
+        question: "Make a wish and blow out your candle! 🎂",
+        notes: ["Another year of you shining", "Grateful for every laugh we share", "May all your wishes come true", "Today is all about celebrating you"],
+        letter: "Happy Birthday! Watching you grow, laugh, and light up every room is the greatest gift. Here is to your best year yet.",
+        promises: "Celebrate you properly, Always cheer loudest for you, Eat extra cake together"
+      },
+      friendship: {
+        ritual: 'band',
+        question: "Best friends for life, no option to cancel? 💚",
+        notes: ["Partner in every chaotic idea", "Zero judgment, 100% support", "Through thick and thin", "Life would be boring without you"],
+        letter: "Thank you for being the person I can call at any hour about anything. No matter where life takes us, you are stuck with me.",
+        promises: "Always answer your calls, Hyping you up forever, Never letting you do silly things alone"
+      }
+    };
+
+    let currentMode = 'girlfriend';
+    let payload = null;
+    let knockCount = 0;
+
+    let audioCtx = null, master = null, musicTimer = null, isMuted = false, recDest = null;
+    const calm = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+    const THEME_EMOJI = { apology: ['💙', '🕊️', '🌧️'], girlfriend: ['💖', '💕', '🌸'], surprise: ['✨', '🎁', '💜'], birthday: ['🎈', '🎉', '🎂'], friendship: ['💚', '🌿', '🤝'] };
+    const NO_LINES = ['No 🙈', 'Nope 😜', 'Try again 😏', 'Too slow 💨', 'Just say yes 🥹', 'Pretty please? 💕'];
+    const TRACKS = {
+      piano: { root: 261.63, bpm: 72, wave: 'triangle', len: 1.1, mel: [12, null, 16, 19, null, 16, 14, null, 12, null, 9, 12, null, 14, 16, null], chords: [[0, 4, 7], [9, 12, 16], [5, 9, 12], [7, 11, 14]] },
+      musicbox: { root: 523.25, bpm: 84, wave: 'sine', len: 0.9, mel: [0, 7, 12, 7, 4, 9, 14, 9, 0, 7, 12, 16, 14, 12, 7, 4], chords: [[0, 4, 7], [5, 9, 12], [9, 12, 16], [7, 11, 14]] },
+      celebrate: { root: 392, bpm: 112, wave: 'triangle', len: 0.5, mel: [0, 0, 2, 0, 5, 4, null, null, 0, 0, 2, 0, 7, 5, null, null], chords: [[0, 4, 7], [0, 4, 7], [5, 9, 12], [7, 11, 14]] }
+    };
+
+    function getAC() {
+      if (!audioCtx) {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return null;
+        audioCtx = new AC();
+        master = audioCtx.createGain();
+        master.gain.value = isMuted ? 0 : 1;
+        const d = audioCtx.createDelay(1), fb = audioCtx.createGain(), wet = audioCtx.createGain();
+        d.delayTime.value = 0.34; fb.gain.value = 0.3; wet.gain.value = 0.35;
+        master.connect(audioCtx.destination);
+        recDest = audioCtx.createMediaStreamDestination(); master.connect(recDest);
+        master.connect(d); d.connect(fb); fb.connect(d); d.connect(wet); wet.connect(audioCtx.destination);
+      }
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      return audioCtx;
+    }
+
+    function tone(f, t, dur, type, vol, att) {
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+      o.type = type; o.frequency.setValueAtTime(f, t);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol, t + (att || 0.02));
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); g.connect(master);
+      o.start(t); o.stop(t + dur + 0.05);
+    }
+
+    function sfx(kind) {
+      try {
+        const ac = getAC(); if (!ac) return;
+        const t = ac.currentTime;
+        if (kind === 'pop') {
+          const o = ac.createOscillator(), g = ac.createGain();
+          o.frequency.setValueAtTime(520, t); o.frequency.exponentialRampToValueAtTime(980, t + 0.07);
+          g.gain.setValueAtTime(0.12, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.12);
+          o.connect(g); g.connect(master); o.start(t); o.stop(t + 0.14);
+        } else if (kind === 'chime') {
+          [784, 988, 1319].forEach((f, i) => tone(f, t + i * 0.09, 0.9, 'sine', 0.08));
+        } else if (kind === 'whoosh') {
+          const o = ac.createOscillator(), g = ac.createGain();
+          o.frequency.setValueAtTime(700, t); o.frequency.exponentialRampToValueAtTime(140, t + 0.5);
+          g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.05, t + 0.12); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.6);
+          o.connect(g); g.connect(master); o.start(t); o.stop(t + 0.65);
+        } else {
+          tone(640, t, 0.12, 'triangle', 0.09);
+        }
+      } catch (e) {}
+    }
+
+    function playStep(tr, s, t) {
+      const f = x => tr.root * Math.pow(2, x / 12);
+      const ch = tr.chords[Math.floor(s / 8) % tr.chords.length];
+      if (s % 8 === 0) {
+        ch.forEach(x => tone(f(x - 12), t, 3.2, 'sine', 0.02, 0.5));
+        tone(f(ch[0] - 24), t, 1.6, 'sine', 0.05, 0.05);
+      }
+      const m = tr.mel[s % tr.mel.length];
+      if (m !== null) tone(f(m), t, tr.len, tr.wave, 0.045);
+    }
+
+    function startSynthMusic(name) {
+      const tr = TRACKS[name]; if (!tr) return;
+      try {
+        const ac = getAC(); if (!ac) return;
+        const fab = document.getElementById('audioFab');
+        fab.style.display = 'block';
+        fab.textContent = isMuted ? '🔇 Muted' : '🔊 Music On';
+        clearInterval(musicTimer);
+        let step = 0, next = ac.currentTime + 0.1;
+        const dt = 30 / tr.bpm;
+        const run = () => {
+          if (next < ac.currentTime) next = ac.currentTime + 0.05;
+          while (next < ac.currentTime + 1.2) { playStep(tr, step++, next); next += dt; }
+        };
+        run();
+        musicTimer = setInterval(run, 250);
+      } catch (e) {}
+    }
+
+    function toggleAudio() {
+      isMuted = !isMuted;
+      if (master) master.gain.setTargetAtTime(isMuted ? 0 : 1, audioCtx.currentTime, 0.05);
+      document.getElementById('audioFab').textContent = isMuted ? '🔇 Muted' : '🔊 Music On';
+    }
+
+    /* ---------- confetti + emoji bursts ---------- */
+    const fxC = document.getElementById('fx'), fxX = fxC.getContext('2d');
+    let parts = [], fxRun = false;
+    function fitFx() {
+      const r = window.devicePixelRatio || 1;
+      fxC.width = innerWidth * r; fxC.height = innerHeight * r;
+      fxX.setTransform(r, 0, 0, r, 0, 0);
+    }
+    window.addEventListener('resize', fitFx); fitFx();
+
+    function burst(x, y, n, emoji) {
+      if (calm) return;
+      const cols = ['#f43f5e', '#f59e0b', '#10b981', '#3b82f6', '#a855f7', '#fde047'];
+      for (let i = 0; i < n; i++) {
+        const a = Math.random() * Math.PI * 2, v = 3 + Math.random() * (emoji ? 3 : 7);
+        parts.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - (emoji ? 3 : 4), s: 5 + Math.random() * 6, c: cols[i % cols.length], e: emoji ? emoji[i % emoji.length] : null, life: 1, rot: Math.random() * 6 });
+      }
+      if (!fxRun) { fxRun = true; requestAnimationFrame(tickFx); }
+    }
+    function tickFx() {
+      fxX.clearRect(0, 0, innerWidth, innerHeight);
+      parts = parts.filter(p => p.life > 0 && p.y < innerHeight + 30);
+      parts.forEach(p => {
+        p.vy += 0.22; p.vx *= 0.99; p.x += p.vx; p.y += p.vy; p.rot += 0.2; p.life -= 0.006;
+        fxX.globalAlpha = Math.max(p.life, 0);
+        if (p.e) { fxX.font = '18px serif'; fxX.fillText(p.e, p.x, p.y); }
+        else { fxX.save(); fxX.translate(p.x, p.y); fxX.rotate(p.rot); fxX.fillStyle = p.c; fxX.fillRect(-p.s / 2, -p.s / 3, p.s, p.s * 0.6); fxX.restore(); }
+      });
+      fxX.globalAlpha = 1;
+      if (parts.length) requestAnimationFrame(tickFx); else fxRun = false;
+    }
+    function celebrate() {
+      sfx('chime');
+      burst(innerWidth / 2, innerHeight * 0.35, 90);
+      burst(innerWidth * 0.2, innerHeight * 0.5, 40);
+      burst(innerWidth * 0.8, innerHeight * 0.5, 40);
+    }
+    document.addEventListener('pointerdown', e => {
+      if (document.getElementById('recipientView').classList.contains('hidden') || e.target.closest('canvas, .pz-stage, input, textarea')) return;
+      burst(e.clientX, e.clientY, 5, THEME_EMOJI[document.body.dataset.theme] || THEME_EMOJI.girlfriend);
+    });
+
+    /* ---------- every line editable ---------- */
+    const DYN = {
+      title: ['For {to}', 'Door title (use {to} for the name)'],
+      knock: ['Tap 3 times', 'Door hint'],
+      yes: ['Yes 💕', 'Ritual · Yes button'],
+      no: ['No 🙈', 'Ritual · No button'],
+      taunts: ['Nope 😜, Try again 😏, Too slow 💨, Just say yes 🥹, Pretty please? 💕', 'Ritual · No button taunts (comma separated)'],
+      cakeTxt: ['Make a wish silently, then tap below to blow out the candle.', 'Ritual · cake text'],
+      cakeBtn: ['🌬️ Blow Candle & Enter', 'Ritual · cake button'],
+      bandTxt: ['Tie on your band to unlock the rest of the walk.', 'Ritual · band text'],
+      bandBtn: ['Tie It On →', 'Ritual · band button'],
+      noteTitle: ['💌 Note #', 'Note card title (number is added)'],
+      noteTap: ['Tap to open', 'Note card hint'],
+      sign: ['— {fr}', 'Letter sign-off (use {fr} for the name)'],
+      keep: ['Signed by {to} • Crafted with care by {fr}', 'Final summary'],
+      memSub: ['a little memory, made with love', 'Video · intro line'],
+      memEnd: ['Sealed with love', 'Video · closing line']
+    };
+    const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    function L(k) {
+      const v = (payload && payload.x && payload.x[k]) || DYN[k][0];
+      return String(v).replace(/\{to\}/g, payload ? payload.to : '').replace(/\{fr\}/g, payload ? payload.fr : '');
+    }
+    function tagLines() {
+      const cnt = {}, keep = ['pzHint', 'peekBtn', 'collageBtn', 'pzNext', 'lockBtn', 'memBtn', 'memDl'];
+      document.querySelectorAll('#recipientView .room *').forEach(el => {
+        if (el.children.length || (el.id && !keep.includes(el.id))) return;
+        if (!['H1', 'H2', 'H3', 'P', 'SPAN', 'SMALL', 'LABEL', 'BUTTON', 'A', 'DIV'].includes(el.tagName)) return;
+        const t = el.textContent.trim();
+        if (t.length < 2) return;
+        const room = el.closest('.room').id, n = room + el.tagName;
+        cnt[n] = (cnt[n] || 0) + 1;
+        el.dataset.k = 'r' + room.slice(4) + '.' + el.tagName.toLowerCase() + cnt[n];
+        el.dataset.d = t;
+      });
+    }
+    function applyLines(x) {
+      document.querySelectorAll('#recipientView [data-k]').forEach(el => { el.textContent = (x && x[el.dataset.k]) || el.dataset.d; });
+    }
+    function buildLineEditor() {
+      const box = document.getElementById('lineList');
+      if (box.children.length) return;
+      const add = (k, def, label) => {
+        const d = document.createElement('div');
+        d.style.marginTop = '8px';
+        const l = document.createElement('div');
+        l.style.cssText = 'font-size:11px; color:var(--muted); margin-bottom:3px;';
+        l.textContent = label;
+        const i = document.createElement(def.length > 55 ? 'textarea' : 'input');
+        if (i.tagName === 'TEXTAREA') i.rows = 2;
+        i.value = def; i.dataset.k = k; i.dataset.d = def; i.maxLength = 300;
+        d.append(l, i); box.appendChild(d);
+      };
+      const kind = { H1: 'heading', H2: 'heading', H3: 'heading', BUTTON: 'button', A: 'button', DIV: 'text' };
+      document.querySelectorAll('#recipientView [data-k]').forEach(el => add(el.dataset.k, el.dataset.d, `Room ${el.dataset.k.slice(1).split('.')[0]} · ${kind[el.tagName] || 'line'}`));
+      Object.keys(DYN).forEach(k => add(k, DYN[k][0], DYN[k][1]));
+    }
+    function collectLines() {
+      const x = {};
+      document.querySelectorAll('#lineList [data-k]').forEach(i => { const v = i.value.trim(); if (v && v !== i.dataset.d) x[i.dataset.k] = v.slice(0, 300); });
+      return x;
+    }
+    function resetLines() { document.querySelectorAll('#lineList [data-k]').forEach(i => { i.value = i.dataset.d; }); }
+
+    /* ---------- photo hosting settings (saved on this phone) ---------- */
+    function saveCld() {
+      CLOUDINARY.cloud = document.getElementById('cldCloud').value.trim();
+      CLOUDINARY.preset = document.getElementById('cldPreset').value.trim();
+      try { localStorage.setItem('cld2', JSON.stringify(CLOUDINARY)); } catch (e) {}
+      document.getElementById('uploadNote').textContent = noteDefault();
+    }
+    function loadCld() {
+      try {
+        const v = JSON.parse(localStorage.getItem('cld2') || 'null');
+        if (v) { CLOUDINARY.cloud = v.cloud || CLOUDINARY.cloud; CLOUDINARY.preset = v.preset || CLOUDINARY.preset; }
+      } catch (e) {}
+      document.getElementById('cldCloud').value = CLOUDINARY.cloud;
+      document.getElementById('cldPreset').value = CLOUDINARY.preset;
+    }
+
+    /* ---------- typewriter + sparkle trail ---------- */
+    function typeIn(el) {
+      if (calm) return;
+      const full = el._iv ? el.dataset.full : el.textContent;
+      clearInterval(el._iv); el._iv = null;
+      if (!full) return;
+      el.dataset.full = full;
+      el.style.minHeight = el.offsetHeight + 'px';
+      el.textContent = '';
+      let i = 0;
+      el._iv = setInterval(() => {
+        el.textContent = full.slice(0, ++i);
+        if (i >= full.length) { clearInterval(el._iv); el._iv = null; }
+      }, 24);
+    }
+    let lastTrail = 0;
+    document.addEventListener('pointermove', e => {
+      const n = performance.now();
+      if (n - lastTrail < 70 || document.getElementById('recipientView').classList.contains('hidden') || e.target.closest('canvas, .pz-stage')) return;
+      lastTrail = n;
+      burst(e.clientX, e.clientY, 1, ['✨']);
+    });
+
+    /* ---------- animated memory video (recorded on the phone) ---------- */
+    function rr(x, a, b, w, h, r) {
+      x.beginPath(); x.moveTo(a + r, b);
+      x.arcTo(a + w, b, a + w, b + h, r); x.arcTo(a + w, b + h, a, b + h, r);
+      x.arcTo(a, b + h, a, b, r); x.arcTo(a, b, a + w, b, r); x.closePath();
+    }
+    const eo = u => 1 - Math.pow(1 - u, 3);
+    function coverDraw(x, im, dx, dy, dw, dh, zoom) {
+      const k = Math.max(dw / im.width, dh / im.height) * zoom, w = im.width * k, h = im.height * k;
+      x.save(); rr(x, dx, dy, dw, dh, 10); x.clip();
+      x.drawImage(im, dx + (dw - w) / 2, dy + (dh - h) / 2, w, h);
+      x.restore();
+    }
+    function drawMem(x, M, t) {
+      const { W, H, P, S, em } = M, o0 = M.intro + M.slides.length * M.each;
+      x.setTransform(1, 0, 0, 1, 0, 0);
+      x.globalAlpha = 1; x.shadowColor = 'transparent';
+      x.fillStyle = S; x.fillRect(0, 0, W, H);
+      const g = x.createRadialGradient(W * (0.5 + 0.25 * Math.sin(t * 0.6)), H * (0.4 + 0.15 * Math.cos(t * 0.5)), 20, W / 2, H / 2, H * 0.7);
+      g.addColorStop(0, 'rgba(255,255,255,.85)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+      x.fillStyle = g; x.fillRect(0, 0, W, H);
+      x.textAlign = 'center'; x.textBaseline = 'middle';
+      x.globalAlpha = 0.5;
+      for (let i = 0; i < 14; i++) {
+        const sd = (i * 0.618) % 1;
+        x.font = (24 + (i % 4) * 9) + 'px serif';
+        x.fillText(em[i % em.length], sd * W + Math.sin(t * 1.2 + i) * 18, H + 40 - ((t * 45 + sd * H * 1.7) % (H + 80)));
+      }
+      x.globalAlpha = 1;
+      if (t < M.intro) {
+        const sc = 0.55 + 0.45 * eo(Math.min(1, t / 0.9));
+        x.globalAlpha = Math.max(0, Math.min(1, t / 0.5, (M.intro - t) / 0.4));
+        x.font = Math.round(170 * sc) + 'px serif'; x.fillText(em[0], W / 2, H * 0.36);
+        x.fillStyle = P; x.font = '800 ' + Math.round(62 * sc) + 'px Fraunces, Georgia, serif'; x.fillText(M.title, W / 2, H * 0.52, W - 60);
+        x.fillStyle = '#475569'; x.font = '700 26px Nunito, sans-serif'; x.fillText(M.sub, W / 2, H * 0.58, W - 60);
+        x.globalAlpha = 1;
+      }
+      M.slides.forEach((sl, k) => {
+        const u = (t - M.intro - k * M.each) / M.each;
+        if (u < 0 || u >= 1) return;
+        const a = Math.max(0, Math.min(1, u / 0.15, (1 - u) / 0.15));
+        const yo = (1 - eo(Math.min(1, u / 0.25))) * 170;
+        const rot = ((k % 2) ? 1 : -1) * (3.2 - 2.2 * eo(Math.min(1, u / 0.3))) * Math.PI / 180;
+        const cw = W * 0.78, pad = 16, ph = cw - pad * 2, ch = ph + pad + 74;
+        x.save(); x.globalAlpha = a; x.translate(W / 2, H * 0.46 + yo); x.rotate(rot);
+        x.shadowColor = 'rgba(0,0,0,.28)'; x.shadowBlur = 30; x.shadowOffsetY = 12;
+        x.fillStyle = '#fff'; rr(x, -cw / 2, -ch / 2, cw, ch, 14); x.fill();
+        x.shadowColor = 'transparent';
+        const dx = -cw / 2 + pad, dy = -ch / 2 + pad;
+        if (sl.im) coverDraw(x, sl.im, dx, dy, ph, ph, 1 + 0.1 * u);
+        else { x.fillStyle = S; rr(x, dx, dy, ph, ph, 10); x.fill(); x.font = '90px serif'; x.fillStyle = P; x.fillText('💖', 0, dy + ph / 2); }
+        x.fillStyle = '#1f2937'; x.font = '600 28px Fraunces, Georgia, serif';
+        x.fillText(sl.c || em[k % em.length], 0, ch / 2 - 40, cw - 40);
+        x.restore();
+      });
+      if (t >= M.intro && t < o0) {
+        const cur = Math.floor((t - M.intro) / M.each);
+        for (let k = 0; k < M.slides.length; k++) {
+          x.fillStyle = k === cur ? P : 'rgba(0,0,0,.18)';
+          x.beginPath(); x.arc(W / 2 + (k - (M.slides.length - 1) / 2) * 24, H - 90, k === cur ? 7 : 5, 0, 7); x.fill();
+        }
+      }
+      if (t >= o0) {
+        const u = (t - o0) / M.outro, a = Math.min(1, u / 0.12);
+        x.globalAlpha = a;
+        x.font = Math.round(120 * (1 + 0.06 * Math.sin(t * 5))) + 'px serif'; x.fillText('💞', W / 2, H * 0.2);
+        x.fillStyle = P; x.font = '800 44px Fraunces, Georgia, serif'; x.fillText(M.end, W / 2, H * 0.31, W - 60);
+        x.fillStyle = '#1f2937'; x.font = '700 30px Nunito, sans-serif'; x.fillText(M.names, W / 2, H * 0.37, W - 60);
+        const sw = W * 0.78, sh = 150, sy = H * 0.47;
+        x.save(); x.shadowColor = 'rgba(0,0,0,.2)'; x.shadowBlur = 24; x.shadowOffsetY = 8;
+        x.fillStyle = '#fff'; rr(x, W / 2 - sw / 2, sy - sh / 2, sw, sh, 18); x.fill(); x.restore();
+        if (M.sig && M.sig.width && M.sig.height) {
+          const k = Math.min((sw - 40) / M.sig.width, (sh - 40) / M.sig.height);
+          x.drawImage(M.sig, W / 2 - M.sig.width * k / 2, sy - M.sig.height * k / 2, M.sig.width * k, M.sig.height * k);
+        }
+        x.fillStyle = '#64748b'; x.font = '600 20px Nunito, sans-serif'; x.fillText(M.date, W / 2, sy + sh / 2 + 30);
+        M.prom.forEach((p, i) => {
+          x.globalAlpha = a * Math.min(1, Math.max(0, (u - 0.25 - i * 0.12) / 0.1));
+          x.fillStyle = '#1f2937'; x.font = '700 24px Nunito, sans-serif'; x.fillText('✓ ' + p, W / 2, H * 0.66 + i * 44, W - 70);
+        });
+        x.globalAlpha = 1;
+        const cols = [P, '#f59e0b', '#10b981', '#3b82f6', '#a855f7', '#fde047'];
+        for (let i = 0; i < 46; i++) {
+          const sd = (i * 0.754) % 1, py = ((t - o0) * (140 + sd * 90) + sd * H * 3) % (H + 40) - 20;
+          x.save(); x.translate(sd * W + Math.sin(t * 2 + i) * 20, py); x.rotate(t * 3 + i);
+          x.fillStyle = cols[i % 6]; x.fillRect(-6, -4, 12, 8); x.restore();
+        }
+      }
+    }
+    async function makeMemory() {
+      const btn = document.getElementById('memBtn'), st = document.getElementById('memStatus'), cv = document.getElementById('memCanvas'), dl = document.getElementById('memDl');
+      if (!window.MediaRecorder || !cv.captureStream) { st.textContent = 'This browser cannot record video. Try Chrome, or use Save the collage on the gallery page.'; return; }
+      btn.disabled = true; dl.classList.add('hidden');
+      st.textContent = 'Getting your photos ready…';
+      try {
+        if (document.fonts && document.fonts.ready) await document.fonts.ready;
+        const imgs = await Promise.all(photos.map(p => loadImg(p.u)));
+        const css = getComputedStyle(document.body);
+        const W = 540, H = 960;
+        cv.width = W; cv.height = H; cv.classList.remove('hidden');
+        const M = {
+          W, H, P: css.getPropertyValue('--primary').trim() || '#e11d48', S: css.getPropertyValue('--primary-soft').trim() || '#ffe4e6',
+          em: THEME_EMOJI[document.body.dataset.theme] || THEME_EMOJI.girlfriend,
+          slides: photos.map((p, i) => ({ im: imgs[i], c: p.c })), intro: 2.6, each: 3, outro: 5.5,
+          sig: document.getElementById('sigPad'), title: L('title'), sub: L('memSub'), end: L('memEnd'),
+          names: `${payload.to} & ${payload.fr}`,
+          date: new Date().toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' }),
+          prom: (payload.p || []).slice(0, 3)
+        };
+        const total = M.intro + M.slides.length * M.each + M.outro;
+        const x = cv.getContext('2d');
+        drawMem(x, M, 0);
+        const stream = cv.captureStream(30);
+        getAC();
+        if (recDest) recDest.stream.getAudioTracks().forEach(tr => stream.addTrack(tr));
+        if (payload.s && musicTimer === null) startSynthMusic(payload.s);
+        const mime = ['video/mp4;codecs=avc1.42E01E,mp4a.40.2', 'video/mp4', 'video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/webm'].find(t => MediaRecorder.isTypeSupported(t)) || '';
+        const rec = new MediaRecorder(stream, mime ? { mimeType: mime, videoBitsPerSecond: 2000000 } : undefined);
+        const chunks = [];
+        rec.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
+        const stopped = new Promise(res => { rec.onstop = res; });
+        rec.start(250);
+        const t0 = performance.now();
+        await new Promise(res => {
+          const loop = () => {
+            const t = (performance.now() - t0) / 1000;
+            drawMem(x, M, Math.min(t, total));
+            st.textContent = `Recording your memory… ${Math.min(100, Math.round(t / total * 100))}% (keep this screen open)`;
+            if (t < total) requestAnimationFrame(loop); else res();
+          };
+          loop();
+        });
+        rec.stop();
+        await stopped;
+        const type = rec.mimeType || mime || 'video/webm';
+        dl.href = URL.createObjectURL(new Blob(chunks, { type }));
+        dl.download = 'our-memory.' + (type.includes('mp4') ? 'mp4' : 'webm');
+        dl.classList.remove('hidden');
+        st.textContent = '✓ Your animated memory is ready. Tap download to keep it.';
+        celebrate();
+      } catch (e) {
+        st.textContent = 'Could not make the video here. Try Chrome, or use Save the collage on the gallery page.';
+      }
+      btn.disabled = false;
+    }
+
+    function buildFloaters() {
+      const w = document.getElementById('floaters'); w.innerHTML = '';
+      const em = THEME_EMOJI[document.body.dataset.theme] || THEME_EMOJI.girlfriend;
+      for (let i = 0; i < 14; i++) {
+        const sp = document.createElement('span');
+        sp.textContent = em[i % em.length];
+        sp.style.left = (Math.random() * 96) + '%';
+        sp.style.fontSize = (14 + Math.random() * 18) + 'px';
+        sp.style.animationDuration = (9 + Math.random() * 10) + 's';
+        sp.style.animationDelay = (-Math.random() * 16) + 's';
+        w.appendChild(sp);
+      }
+    }
+
+    /* ---------- link + photo helpers ---------- */
+    function b64fix(x) {
+      x = x.replace(/ /g, '+').replace(/-/g, '+').replace(/_/g, '/');
+      while (x.length % 4) x += '=';
+      return x;
+    }
+    function buildPhotoFields() {
+      loadCld();
+      buildLineEditor();
+      const w = document.getElementById('extraPhotos');
+      document.getElementById('uploadNote').textContent = noteDefault();
+      if (w.children.length) return;
+      for (let i = 2; i <= 6; i++) {
+        w.insertAdjacentHTML('beforeend', `<div style="display:grid; grid-template-columns:3fr 2fr; gap:6px; margin-top:6px;"><input type="url" id="ph${i}" placeholder="Photo ${i} URL (optional)" /><input type="text" id="cap${i}" placeholder="Caption" maxlength="40" /></div>`);
+      }
+    }
+    const hosted = () => !!(CLOUDINARY.cloud && CLOUDINARY.preset);
+    function noteDefault() {
+      return hosted() ? '📷 Add photos from your phone. They upload and go into the shared link.' : '📷 Add photos from your phone. Preview only until you fill in CLOUDINARY at the top of the script.';
+    }
+    function shrink(file, max) {
+      return new Promise((res, rej) => {
+        const u = URL.createObjectURL(file), im = new Image();
+        im.onload = () => {
+          const k = Math.min(1, max / Math.max(im.width, im.height));
+          const c = document.createElement('canvas');
+          c.width = Math.round(im.width * k); c.height = Math.round(im.height * k);
+          c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
+          URL.revokeObjectURL(u);
+          c.toBlob(b => b ? res(b) : rej(new Error('shrink')), 'image/jpeg', 0.85);
+        };
+        im.onerror = () => { URL.revokeObjectURL(u); rej(new Error('load')); };
+        im.src = u;
+      });
+    }
+    async function uploadPhoto(file) {
+      const blob = await shrink(file, 1400);
+      if (!hosted()) return URL.createObjectURL(blob);
+      const fd = new FormData();
+      fd.append('file', blob, 'photo.jpg');
+      fd.append('upload_preset', CLOUDINARY.preset);
+      const r = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY.cloud}/image/upload`, { method: 'POST', body: fd });
+      if (!r.ok) {
+        let msg = 'HTTP ' + r.status;
+        try { const j = await r.json(); if (j.error && j.error.message) msg = j.error.message; } catch (err) {}
+        throw new Error(msg);
+      }
+      const j = await r.json();
+      return j.secure_url.replace('/upload/', '/upload/q_auto,f_auto,w_1400/');
+    }
+    function freeSlot() {
+      const m = document.getElementById('mediaUrl');
+      const preset = [...document.querySelectorAll('.gif-thumb')].some(i => i.src === m.value);
+      if (!m.value || preset) { document.querySelectorAll('.gif-thumb').forEach(i => i.classList.remove('selected')); return m; }
+      return ['ph2', 'ph3', 'ph4', 'ph5', 'ph6'].map(id => document.getElementById(id)).find(el => !el.value) || null;
+    }
+    async function addLocalPhoto(inp) {
+      const files = [...(inp.files || [])];
+      inp.value = '';
+      const note = document.getElementById('uploadNote');
+      let added = 0;
+      for (let i = 0; i < files.length; i++) {
+        const slot = freeSlot();
+        if (!slot) { note.textContent = 'All 6 photo slots are full. Clear one to add more.'; return; }
+        note.textContent = `Adding photo ${i + 1} of ${files.length}…`;
+        try { slot.value = await uploadPhoto(files[i]); added++; }
+        catch (e) {
+          const m = (e && e.message) || '';
+          note.textContent = (m === 'load' || m === 'shrink') ? 'Could not read that photo. Try a JPG or PNG.'
+            : (m === 'Failed to fetch') ? 'Could not reach Cloudinary. Check your connection.'
+            : 'Cloudinary says: ' + m + '. Check the preset name and that its Signing mode is Unsigned.';
+          return;
+        }
+      }
+      if (added) note.textContent = hosted() ? `✓ ${added} photo${added > 1 ? 's' : ''} uploaded. They will be in the shared link.` : `${added} photo${added > 1 ? 's' : ''} added for Preview. Fill in CLOUDINARY at the top of the script to include them in the shared link.`;
+    }
+    function collectPhotos() {
+      const ids = [['mediaUrl', 'cap1'], ['ph2', 'cap2'], ['ph3', 'cap3'], ['ph4', 'cap4'], ['ph5', 'cap5'], ['ph6', 'cap6']], out = [];
+      ids.forEach(([u, c], i) => {
+        const url = (document.getElementById(u).value || '').trim();
+        if (url || i === 0) out.push({ u: url || document.querySelector('.gif-thumb').src, c: (document.getElementById(c).value || '').trim() });
+      });
+      return out;
+    }
+    function ritualDone(id, icon) {
+      if (ritualDone.busy) return;
+      ritualDone.busy = true; setTimeout(() => { ritualDone.busy = false; }, 1300);
+      const el = id ? document.getElementById(id) : null;
+      if (el) { el.style.animation = 'none'; el.textContent = icon; el.style.transform = 'scale(1.25)'; }
+      celebrate();
+      setTimeout(() => goRoom(3), 1000);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      tagLines();
+      buildFloaters();
+      const pathMode = window.location.pathname.replace(/^\/+|\/+$/g, '').toLowerCase();
+      if (MODE_PRESETS[pathMode]) {
+        selectMode(pathMode);
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      const encoded = params.get('m');
+
+      if (encoded) {
+        try {
+          const decodedStr = decodeURIComponent(escape(atob(b64fix(encoded))));
+          payload = JSON.parse(decodedStr);
+          initRecipientMode(payload);
+        } catch (e) {
+          showCreator();
+        }
+      } else {
+        showCreator();
+      }
+    });
+
+    function showCreator() {
+      buildPhotoFields();
+      document.getElementById('creatorView').classList.remove('hidden');
+      const firstGif = document.querySelector('.gif-thumb');
+      if (firstGif && !document.getElementById('mediaUrl').value) {
+        document.getElementById('mediaUrl').value = firstGif.src;
+      }
+    }
+
+    function selectMode(mode) {
+      currentMode = mode;
+      document.body.setAttribute('data-theme', mode);
+      document.querySelectorAll('.mode-pill').forEach(el => {
+        el.classList.toggle('active', el.dataset.mode === mode);
+      });
+      const def = MODE_PRESETS[mode];
+      document.getElementById('ritualSelect').value = def.ritual;
+      document.getElementById('questionText').value = def.question;
+      document.getElementById('note1').value = def.notes[0];
+      document.getElementById('note2').value = def.notes[1];
+      document.getElementById('note3').value = def.notes[2];
+      document.getElementById('note4').value = def.notes[3];
+      document.getElementById('letterText').value = def.letter;
+      document.getElementById('promisesText').value = def.promises;
+      buildFloaters();
+    }
+
+    function pickGif(imgEl) {
+      document.querySelectorAll('.gif-thumb').forEach(i => i.classList.remove('selected'));
+      imgEl.classList.add('selected');
+      document.getElementById('mediaUrl').value = imgEl.src;
+    }
+
+    function buildPayload() {
+      const ph = collectPhotos();
+      const pi = +document.getElementById('puzzleSel').value || 0;
+      return {
+        ph, pu: (ph[pi] || ph[0]).u,
+        x: collectLines(),
+        t: currentMode,
+        r: document.getElementById('ritualSelect').value,
+        to: document.getElementById('toName').value.trim() || 'You',
+        fr: document.getElementById('fromName').value.trim() || 'Someone who cares',
+        s: document.getElementById('songSelect').value,
+        img: ph[0].u,
+        q: document.getElementById('questionText').value.trim(),
+        n: [
+          document.getElementById('note1').value.trim(),
+          document.getElementById('note2').value.trim(),
+          document.getElementById('note3').value.trim(),
+          document.getElementById('note4').value.trim()
+        ].filter(Boolean),
+        l: document.getElementById('letterText').value.trim(),
+        p: document.getElementById('promisesText').value.split(',').map(x => x.trim()).filter(Boolean)
+      };
+    }
+
+    function generateShareLink() {
+      const data = buildPayload();
+      const hadLocal = data.ph.some(p => /^blob:/.test(p.u));
+      data.ph = data.ph.filter(p => !/^blob:/.test(p.u));
+      if (!data.ph.length) data.ph = [{ u: document.querySelector('.gif-thumb').src, c: '' }];
+      if (/^blob:/.test(data.pu)) data.pu = data.ph[0].u;
+      data.img = data.ph[0].u;
+      const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data)))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+      document.getElementById('shareNote').textContent = hadLocal ? 'Heads up: photos added from your phone are not in this link. Host them online and paste the URL to include them.' : '';
+      const basePath = window.location.pathname === '/' ? '/girlfriend' : window.location.pathname;
+      const fullUrl = `${window.location.origin}${basePath}?m=${encoded}`;
+      document.getElementById('finalLink').value = fullUrl;
+      document.getElementById('shareResult').classList.remove('hidden');
+    }
+
+    function copyShareLink() {
+      const input = document.getElementById('finalLink');
+      input.select();
+      input.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(input.value).catch(() => document.execCommand('copy'));
+      alert('Private link copied! Ready to send.');
+    }
+
+    function previewExperience() {
+      const data = buildPayload();
+      document.getElementById('creatorView').classList.add('hidden');
+      initRecipientMode(data);
+    }
+
+    /* ==================== RECIPIENT ENGINE ==================== */
+    function initRecipientMode(data) {
+      payload = data;
+      applyLines(data.x);
+      knockCount = 0;
+      document.body.setAttribute('data-theme', data.t || 'girlfriend');
+      buildFloaters();
+      goRoom(1);
+      document.getElementById('recipientView').classList.remove('hidden');
+
+      document.getElementById('r1Title').textContent = L('title');
+      document.getElementById('knockHint').textContent = L('knock') + ' (0 / 3)';
+      setupRitual(data);
+      photos = (Array.isArray(data.ph) && data.ph.length ? data.ph : [{ u: data.img, c: '' }]).slice(0, 6).map(p => ({ u: safeUrl(p && p.u), c: String((p && p.c) || '') }));
+      photoIdx = 0; revealed = new Set();
+      showPhoto(0);
+      buildGallery();
+      setupPuzzle(safeUrl(data.pu || photos[0].u));
+
+      const notesEl = document.getElementById('notesContainer');
+      notesEl.innerHTML = '';
+      (data.n || []).forEach((txt, idx) => {
+        const div = document.createElement('div');
+        div.className = 'note-card';
+        div.style.animationDelay = (idx * 0.09) + 's';
+        div.innerHTML = `<span>${esc(L('noteTitle'))}${idx + 1}</span><small style="color:var(--muted); margin-top:4px; font-weight:400;">${esc(L('noteTap'))}</small>`;
+        div.onclick = () => {
+          div.classList.add('opened');
+          div.textContent = txt;
+          div.style.animationDelay = '0s';
+          sfx('pop'); const r = div.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, 8, ['💌', '✨']);
+        };
+        notesEl.appendChild(div);
+      });
+
+      document.getElementById('finalLetterBody').textContent = data.l || '';
+      document.getElementById('letterSignOff').textContent = L('sign');
+
+      const promEl = document.getElementById('promisesContainer');
+      promEl.innerHTML = '';
+      (data.p || []).forEach(item => {
+        const lbl = document.createElement('label');
+        lbl.className = 'promise-item';
+        const cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.onchange = () => { if (cb.checked) { sfx('pop'); const r = cb.getBoundingClientRect(); burst(r.left, r.top, 10, ['✨', '💖']); } };
+        const sp = document.createElement('span');
+        sp.textContent = item;
+        lbl.append(cb, sp);
+        promEl.appendChild(lbl);
+      });
+    }
+
+    function handleKnock() {
+      if (knockCount >= 3) return;
+      knockCount++;
+      const dot = document.getElementById('kd' + knockCount);
+      if (dot) dot.classList.add('lit');
+      document.getElementById('knockHint').textContent = `${L('knock')} (${knockCount} / 3)`;
+
+      sfx('tick');
+      const ring = document.getElementById('brassRing');
+      ring.classList.remove('shake'); void ring.offsetWidth; ring.classList.add('shake');
+      if (knockCount === 1 && payload && payload.s) {
+        startSynthMusic(payload.s);
+      }
+
+      if (knockCount === 3) {
+        document.getElementById('brassRing').textContent = '✨';
+        celebrate();
+        setTimeout(() => goRoom(2), 750);
+      }
+    }
+
+    function goRoom(num) {
+      document.querySelectorAll('.room').forEach(r => r.classList.add('hidden'));
+      const target = document.getElementById('room' + num);
+      if (target) target.classList.remove('hidden');
+      const sub = target && target.querySelector('.subtitle');
+      if (sub && num > 1) typeIn(sub);
+
+      const dots = document.querySelectorAll('.progress-dot');
+      dots.forEach((d, i) => d.classList.toggle('done', i < num));
+
+      if (num > 1) sfx('whoosh');
+      if (num === 3) requestAnimationFrame(() => showPhoto(photoIdx));
+      if (num === 4) requestAnimationFrame(layoutPuzzle);
+      if (num === 8) requestAnimationFrame(initSignaturePad);
+    }
+
+    function setupRitual(data) {
+      const area = document.getElementById('ritualArea');
+      document.getElementById('r2Sub').textContent = data.q || '';
+      const ritualType = data.r || (data.t === 'birthday' ? 'cake' : data.t === 'friendship' ? 'band' : 'dodge');
+
+      if (ritualType === 'cake') {
+        area.innerHTML = `
+          <div style="font-size:66px; margin:6px 0; transition:transform 0.3s;" id="cakeIcon">🎂</div>
+          <p style="font-size:13px; color:var(--muted); margin-bottom:16px;">${esc(L('cakeTxt'))}</p>
+          <button class="btn" type="button" onclick="ritualDone('cakeIcon','🍰✨')">${esc(L('cakeBtn'))}</button>
+        `;
+      } else if (ritualType === 'band') {
+        area.innerHTML = `
+          <div style="font-size:66px; margin:6px 0; transition:transform 0.3s;" id="bandIcon">🧶</div>
+          <p style="font-size:13px; color:var(--muted); margin-bottom:16px;">${esc(L('bandTxt'))}</p>
+          <button class="btn" type="button" onclick="ritualDone('bandIcon','🤝💚')">${esc(L('bandBtn'))}</button>
+        `;
+      } else {
+        area.innerHTML = `
+          <div class="btn-row">
+            <button class="btn btn-sm" type="button" id="yesBtn" style="min-width:115px;" onclick="ritualDone()">${esc(L('yes'))}</button>
+            <button class="btn btn-sm btn-secondary" type="button" id="dodgeBtn" style="min-width:115px;">${esc(L('no'))}</button>
+          </div>
+        `;
+        const dodge = document.getElementById('dodgeBtn');
+        let dodges = 0;
+        const moveBtn = () => {
+          const x = (Math.random() - 0.5) * 165;
+          const y = (Math.random() - 0.5) * 85;
+          dodge.style.transform = `translate(${x}px, ${y}px)`;
+          dodges++; sfx('pop');
+          const nl = [L('no')].concat(L('taunts').split(',').map(t => t.trim()).filter(Boolean));
+          dodge.textContent = nl[Math.min(dodges, nl.length - 1)];
+          const yes = document.getElementById('yesBtn');
+          if (yes) yes.style.transform = `scale(${Math.min(1 + dodges * 0.07, 1.35)})`;
+        };
+        dodge.addEventListener('mouseover', moveBtn);
+        dodge.addEventListener('touchstart', (e) => { e.preventDefault(); moveBtn(); }, { passive: false });
+      }
+    }
+
+    /* ---------- photo gallery: scratch each photo ---------- */
+    const FALLBACK_IMG = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fda4af"/><stop offset="1" stop-color="#c4b5fd"/></linearGradient></defs><rect width="300" height="300" fill="url(#g)"/><text x="150" y="190" font-size="130" text-anchor="middle">💖</text></svg>');
+    let photos = [], photoIdx = 0, revealed = new Set();
+
+    function safeUrl(u) {
+      u = String(u || '').trim();
+      return /^(https?:\/\/|blob:|data:image\/)/i.test(u) ? u.replace(/["'()\\\s]/g, c => '%' + c.charCodeAt(0).toString(16).padStart(2, '0')) : FALLBACK_IMG;
+    }
+
+    function showPhoto(i) {
+      if (!photos.length) return;
+      photoIdx = (i + photos.length) % photos.length;
+      const img = document.getElementById('scratchImg');
+      img.onerror = () => { img.onerror = null; img.src = FALLBACK_IMG; };
+      img.src = photos[photoIdx].u;
+      document.getElementById('photoCap').textContent = photos[photoIdx].c;
+      document.getElementById('photoCount').textContent = `${photoIdx + 1} / ${photos.length}`;
+      document.getElementById('galNav').style.display = photos.length > 1 ? 'flex' : 'none';
+      initScratchCanvas(revealed.has(photoIdx));
+    }
+
+    function initScratchCanvas(done) {
+      const canvas = document.getElementById('scratchCanvas');
+      const wrap = canvas.parentElement;
+      if (!wrap.offsetWidth) return;
+      canvas.width = wrap.offsetWidth;
+      canvas.height = wrap.offsetHeight;
+      canvas.style.opacity = done ? '0' : '1';
+      canvas.style.pointerEvents = done ? 'none' : 'auto';
+      if (done) return;
+      const ctx = canvas.getContext('2d');
+      const g = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      g.addColorStop(0, '#e2e8f0'); g.addColorStop(0.5, '#f8fafc'); g.addColorStop(1, '#cbd5e1');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#475569';
+      ctx.font = '700 15px Nunito, -apple-system, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('✨ Rub here to reveal ✨', canvas.width / 2, canvas.height / 2);
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.lineWidth = 54; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+
+      let last = null, n = 0, ended = false;
+      const pos = e => { const r = canvas.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+      const draw = (a, b) => { ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); };
+      const cleared = () => {
+        const d = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+        let c = 0, t = 0;
+        for (let i = 3; i < d.length; i += 388) { t++; if (d[i] < 40) c++; }
+        return c / t;
+      };
+      const finish = () => {
+        if (ended) return;
+        ended = true;
+        canvas.style.opacity = '0'; canvas.style.pointerEvents = 'none';
+        revealed.add(photoIdx);
+        sfx('chime');
+        const r = canvas.getBoundingClientRect();
+        burst(r.left + r.width / 2, r.top + r.height / 2, 40, ['✨', '💖']);
+      };
+      canvas.onpointerdown = e => {
+        last = pos(e);
+        try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
+        draw(last, { x: last.x + 0.01, y: last.y });
+      };
+      canvas.onpointermove = e => {
+        if (!last) return;
+        const p = pos(e); draw(last, p); last = p;
+        if (++n % 6 === 0 && cleared() > 0.55) finish();
+      };
+      canvas.onpointerup = canvas.onpointercancel = () => { last = null; if (!ended && cleared() > 0.55) finish(); };
+    }
+
+    /* ---------- gallery wall + collage ---------- */
+    function buildGallery() {
+      const w = document.getElementById('galleryWall');
+      w.innerHTML = '';
+      w.classList.toggle('one', photos.length === 1);
+      photos.forEach((p, i) => {
+        const f = document.createElement('figure');
+        f.className = 'polaroid';
+        f.style.setProperty('--r', ((i % 2 ? 1 : -1) * (1.5 + Math.random() * 3.5)).toFixed(1) + 'deg');
+        f.style.animationDelay = (i * 0.12) + 's';
+        const im = document.createElement('img');
+        im.src = p.u; im.alt = p.c || 'Memory';
+        im.onerror = () => { im.onerror = null; im.src = FALLBACK_IMG; };
+        const cap = document.createElement('figcaption');
+        cap.textContent = p.c || '💖';
+        f.append(im, cap);
+        f.onclick = () => openLightbox(i);
+        w.appendChild(f);
+      });
+    }
+    function openLightbox(i) {
+      document.getElementById('lbImg').src = photos[i].u;
+      document.getElementById('lbCap').textContent = photos[i].c;
+      document.getElementById('lightbox').classList.remove('hidden');
+      sfx('pop');
+    }
+    function loadImg(u) {
+      return new Promise(res => { const im = new Image(); im.crossOrigin = 'anonymous'; im.onload = () => res(im); im.onerror = () => res(null); im.src = u; });
+    }
+    async function saveCollage() {
+      const btn = document.getElementById('collageBtn');
+      const label = btn.textContent; btn.disabled = true; btn.textContent = 'Making your collage…';
+      try {
+        const n = photos.length, cols = n > 1 ? 2 : 1, rows = Math.ceil(n / cols), cell = 520, pad = 40, cap = 70, head = 120;
+        const W = cols * cell + (cols + 1) * pad, H = head + rows * (cell + cap + pad) + pad;
+        const c = document.createElement('canvas'); c.width = W; c.height = H;
+        const x = c.getContext('2d');
+        const css = getComputedStyle(document.body);
+        x.fillStyle = css.getPropertyValue('--primary-soft').trim() || '#ffe4e6';
+        x.fillRect(0, 0, W, H);
+        x.fillStyle = css.getPropertyValue('--primary').trim() || '#e11d48';
+        x.textAlign = 'center';
+        x.font = '800 48px Fraunces, Georgia, serif';
+        x.fillText(`For ${payload.to}, from ${payload.fr}`, W / 2, 80);
+        const imgs = await Promise.all(photos.map(p => loadImg(p.u)));
+        photos.forEach((p, i) => {
+          const cx = pad + (i % cols) * (cell + pad) + cell / 2, cy = head + pad + Math.floor(i / cols) * (cell + cap + pad) + (cell + cap) / 2;
+          x.save();
+          x.translate(cx, cy); x.rotate((i % 2 ? 1 : -1) * 2 * Math.PI / 180);
+          x.shadowColor = 'rgba(0,0,0,.25)'; x.shadowBlur = 24; x.shadowOffsetY = 10;
+          x.fillStyle = '#fff'; x.fillRect(-cell / 2, -(cell + cap) / 2, cell, cell + cap);
+          x.shadowColor = 'transparent';
+          const dx = -cell / 2 + 16, dy = -(cell + cap) / 2 + 16, dw = cell - 32, dh = cell - 32, im = imgs[i];
+          if (im) {
+            const k = Math.max(dw / im.width, dh / im.height), w = im.width * k, h = im.height * k;
+            x.beginPath(); x.rect(dx, dy, dw, dh); x.clip();
+            x.drawImage(im, dx + (dw - w) / 2, dy + (dh - h) / 2, w, h);
+          } else { x.fillStyle = '#fecdd3'; x.fillRect(dx, dy, dw, dh); }
+          x.restore();
+          x.save();
+          x.translate(cx, cy); x.rotate((i % 2 ? 1 : -1) * 2 * Math.PI / 180);
+          x.fillStyle = '#1f2937'; x.font = '600 28px Fraunces, Georgia, serif'; x.textAlign = 'center';
+          x.fillText(p.c || '💖', 0, (cell + cap) / 2 - 22, cell - 40);
+          x.restore();
+        });
+        const blob = await new Promise(res => c.toBlob(res, 'image/png'));
+        if (!blob) throw new Error('blob');
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = 'our-moments-collage.png';
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 5000);
+        celebrate();
+        btn.textContent = '✓ Collage saved';
+      } catch (e) {
+        btn.textContent = 'Could not save. Try a screenshot instead.';
+      }
+      setTimeout(() => { btn.disabled = false; btn.textContent = label; }, 3000);
+    }
+
+    /* ---------- jigsaw: 8 pieces on the board, 1 waits off-screen ---------- */
+    const pz = { img: '', lost: 0, slotOf: {}, els: {}, sel: null, moves: 0, secs: 0, timer: null, state: 'play', S: 0, nat: null, drag: null, bound: false, hole: null, peek: null };
+
+    function fmt(t) { return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); }
+    function statusLine() { document.getElementById('puzzleStatus').textContent = `Moves: ${pz.moves}  •  ${fmt(pz.secs)}`; }
+    function slotXY(s) { return { x: (s % 3) * pz.S, y: Math.floor(s / 3) * pz.S }; }
+    function moveEl(el, x, y) { el._x = x; el._y = y; el.style.transform = `translate(${x}px, ${y}px)`; }
+
+    function setPos(el, id) {
+      let p;
+      if (id === pz.lost) {
+        const st = document.getElementById('pzStage');
+        if (pz.state === 'fitted') p = slotXY(pz.lost);
+        else if (pz.state === 'arriving' || pz.state === 'tray') p = { x: pz.S, y: pz.S * 3 + 8 };
+        else p = { x: window.innerWidth - st.getBoundingClientRect().left + 60, y: pz.S * 3 + 8 };
+      } else {
+        p = slotXY(pz.slotOf[id]);
+      }
+      moveEl(el, p.x, p.y);
+    }
+
+    function setupPuzzle(src) {
+      clearInterval(pz.timer); pz.timer = null;
+      pz.img = src; pz.nat = null; pz.sel = null; pz.moves = 0; pz.secs = 0; pz.state = 'play'; pz.drag = null;
+      pz.lost = Math.floor(Math.random() * 9);
+      const ids = [0, 1, 2, 3, 4, 5, 6, 7, 8].filter(i => i !== pz.lost);
+      let slots;
+      do {
+        slots = ids.concat([null]);
+        for (let i = slots.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [slots[i], slots[j]] = [slots[j], slots[i]]; }
+      } while (slots.filter((v, i) => v === i).length > 1);
+      pz.slotOf = {};
+      slots.forEach((id, s) => { if (id !== null) pz.slotOf[id] = s; });
+      const stage = document.getElementById('pzStage');
+      stage.querySelectorAll('.pz-piece, .pz-hole, .pz-peek').forEach(el => el.remove());
+      pz.els = {};
+      for (let id = 0; id < 9; id++) {
+        const el = document.createElement('div');
+        el.className = 'pz-piece' + (id === pz.lost ? ' pz-lost' : '');
+        el.dataset.id = id;
+        el.innerHTML = '<div class="pz-in"></div>';
+        stage.appendChild(el);
+        pz.els[id] = el;
+      }
+      pz.hole = document.createElement('div'); pz.hole.className = 'pz-hole'; stage.appendChild(pz.hole);
+      pz.peek = document.createElement('div'); pz.peek.className = 'pz-peek'; stage.appendChild(pz.peek);
+      document.getElementById('pzNext').disabled = true;
+      document.getElementById('pzHint').style.opacity = '1';
+      statusLine();
+      bindPuzzle();
+      const im = new Image();
+      im.onload = () => { pz.nat = { w: im.naturalWidth || 1, h: im.naturalHeight || 1 }; layoutPuzzle(); };
+      im.onerror = () => { pz.img = FALLBACK_IMG; pz.nat = { w: 300, h: 300 }; layoutPuzzle(); };
+      im.src = src;
+    }
+
+    function layoutPuzzle() {
+      const stage = document.getElementById('pzStage');
+      const W = stage.clientWidth;
+      if (!W || !pz.els[0]) return;
+      const S = W / 3; pz.S = S;
+      stage.style.paddingBottom = (S + 16) + 'px';
+      document.getElementById('pzHint').style.height = (S + 16) + 'px';
+      const nat = pz.nat || { w: 1, h: 1 };
+      const k = Math.max(W / nat.w, W / nat.h), bw = nat.w * k, bh = nat.h * k, ox = (W - bw) / 2, oy = (W - bh) / 2;
+      const url = `url("${pz.img}")`;
+      for (let id = 0; id < 9; id++) {
+        const el = pz.els[id], c = id % 3, r = Math.floor(id / 3);
+        el.style.width = el.style.height = S + 'px';
+        el.firstChild.style.backgroundImage = url;
+        el.firstChild.style.backgroundSize = `${bw}px ${bh}px`;
+        el.firstChild.style.backgroundPosition = `${ox - c * S}px ${oy - r * S}px`;
+        if (!el.classList.contains('dragging')) setPos(el, id);
+      }
+      const t = slotXY(pz.lost);
+      pz.hole.style.width = pz.hole.style.height = S + 'px';
+      pz.hole.style.transform = `translate(${t.x}px, ${t.y}px)`;
+      pz.peek.style.width = pz.peek.style.height = W + 'px';
+      pz.peek.style.backgroundImage = url;
+    }
+    window.addEventListener('resize', () => { if (!document.getElementById('room4').classList.contains('hidden')) layoutPuzzle(); });
+
+    function bindPuzzle() {
+      if (pz.bound) return;
+      pz.bound = true;
+      const stage = document.getElementById('pzStage');
+      const pk = document.getElementById('peekBtn');
+      pk.onpointerdown = () => { if (pz.peek) pz.peek.classList.add('on'); };
+      pk.onpointerup = pk.onpointerleave = pk.onpointercancel = () => { if (pz.peek) pz.peek.classList.remove('on'); };
+      pk.oncontextmenu = e => e.preventDefault();
+
+      stage.addEventListener('pointerdown', e => {
+        const el = e.target.closest('.pz-piece');
+        const r = stage.getBoundingClientRect(), cx = e.clientX - r.left, cy = e.clientY - r.top;
+        if (!el) {
+          if (pz.state === 'play' && pz.sel !== null && cx >= 0 && cy >= 0 && cx < pz.S * 3 && cy < pz.S * 3) putPiece(pz.sel, Math.floor(cy / pz.S) * 3 + Math.floor(cx / pz.S));
+          return;
+        }
+        const id = +el.dataset.id;
+        if (id === pz.lost ? pz.state !== 'tray' : pz.state !== 'play') return;
+        pz.drag = { el, id, sx: e.clientX, sy: e.clientY, ox: el._x, oy: el._y, moved: false };
+        try { stage.setPointerCapture(e.pointerId); } catch (err) {}
+        e.preventDefault();
+      });
+      stage.addEventListener('pointermove', e => {
+        const d = pz.drag; if (!d) return;
+        const dx = e.clientX - d.sx, dy = e.clientY - d.sy;
+        if (!d.moved && Math.hypot(dx, dy) > 6) { d.moved = true; d.el.classList.add('dragging'); }
+        if (d.moved) moveEl(d.el, d.ox + dx, d.oy + dy);
+      });
+      const end = e => {
+        const d = pz.drag; if (!d) return;
+        pz.drag = null;
+        d.el.classList.remove('dragging');
+        if (e.type === 'pointercancel') { setPos(d.el, d.id); return; }
+        if (d.id === pz.lost) { dropLost(d); return; }
+        const r = stage.getBoundingClientRect(), cx = e.clientX - r.left, cy = e.clientY - r.top;
+        if (d.moved) {
+          if (cx < 0 || cy < 0 || cx >= pz.S * 3 || cy >= pz.S * 3) { setPos(d.el, d.id); return; }
+          putPiece(d.id, Math.floor(cy / pz.S) * 3 + Math.floor(cx / pz.S));
+        } else if (pz.sel === null) selectPiece(d.id);
+        else if (pz.sel === d.id) selectPiece(null);
+        else putPiece(pz.sel, pz.slotOf[d.id]);
+      };
+      stage.addEventListener('pointerup', end);
+      stage.addEventListener('pointercancel', end);
+    }
+
+    function selectPiece(id) {
+      if (pz.sel !== null && pz.els[pz.sel]) pz.els[pz.sel].classList.remove('sel');
+      pz.sel = id;
+      if (id !== null) { pz.els[id].classList.add('sel'); sfx('pop'); }
+    }
+
+    function putPiece(id, slot) {
+      const from = pz.slotOf[id];
+      selectPiece(null);
+      if (slot === from) { setPos(pz.els[id], id); return; }
+      const other = Object.keys(pz.slotOf).find(k => pz.slotOf[k] === slot);
+      if (other !== undefined) pz.slotOf[other] = from;
+      pz.slotOf[id] = slot;
+      pz.moves++; sfx('tick');
+      Object.keys(pz.slotOf).forEach(k => setPos(pz.els[k], +k));
+      if (!pz.timer) pz.timer = setInterval(() => { pz.secs++; statusLine(); }, 1000);
+      statusLine();
+      if (Object.keys(pz.slotOf).every(k => pz.slotOf[k] === +k)) eightSolved();
+    }
+
+    function eightSolved() {
+      pz.state = 'busy';
+      clearInterval(pz.timer); pz.timer = null;
+      sfx('chime');
+      document.getElementById('puzzleStatus').textContent = 'Nearly there… but one piece is missing 👀';
+      pz.hole.classList.add('on');
+      setTimeout(driftIn, 1200);
+    }
+
+    function driftIn() {
+      const el = pz.els[pz.lost];
+      pz.state = 'arriving';
+      document.getElementById('pzHint').style.opacity = '0';
+      el.classList.add('shown', 'fly');
+      sfx('whoosh');
+      requestAnimationFrame(() => requestAnimationFrame(() => setPos(el, pz.lost)));
+      setTimeout(() => {
+        el.classList.remove('fly');
+        pz.state = 'tray';
+        document.getElementById('puzzleStatus').textContent = 'There it is! Drag it into the gap, or just tap it ✨';
+      }, 2500);
+    }
+
+    function dropLost(d) {
+      const t = slotXY(pz.lost);
+      if (!d.moved || Math.hypot(d.el._x - t.x, d.el._y - t.y) < pz.S * 0.7) fitLost();
+      else setPos(d.el, d.id);
+    }
+
+    function fitLost() {
+      const el = pz.els[pz.lost];
+      pz.state = 'fitted';
+      el.classList.add('fit');
+      setPos(el, pz.lost);
+      pz.hole.classList.remove('on');
+      sfx('tick');
+      setTimeout(celebrate, 250);
+      document.getElementById('puzzleStatus').textContent = `✨ Complete in ${pz.moves} moves, ${fmt(pz.secs)}!`;
+      document.getElementById('pzNext').disabled = false;
+    }
+
+    function solvePuzzleInstant() {
+      if (pz.state !== 'play') return;
+      selectPiece(null);
+      Object.keys(pz.slotOf).forEach(k => { pz.slotOf[k] = +k; setPos(pz.els[k], +k); });
+      eightSolved();
+    }
+
+    function breakSeal() {
+      sfx('pop'); celebrate();
+      document.getElementById('sealPrompt').classList.add('hidden');
+      document.getElementById('letterReveal').classList.remove('hidden');
+    }
+
+    let sigCtx = null;
+    function initSignaturePad() {
+      const canvas = document.getElementById('sigPad');
+      canvas.width = canvas.offsetWidth || 350;
+      canvas.height = canvas.offsetHeight || 105;
+      sigCtx = canvas.getContext('2d');
+      sigCtx.strokeStyle = '#1f2937';
+      sigCtx.lineWidth = 2.4;
+      sigCtx.lineCap = 'round';
+      sigCtx.lineJoin = 'round';
+
+      let signing = false;
+      const pos = (e) => {
+        const r = canvas.getBoundingClientRect();
+        const pt = e.touches ? e.touches[0] : e;
+        return { x: pt.clientX - r.left, y: pt.clientY - r.top };
+      };
+
+      canvas.onpointerdown = (e) => { signing = true; const p = pos(e); sigCtx.beginPath(); sigCtx.moveTo(p.x, p.y); };
+      canvas.onpointermove = (e) => { if (signing) { const p = pos(e); sigCtx.lineTo(p.x, p.y); sigCtx.stroke(); } };
+      window.addEventListener('pointerup', () => { signing = false; });
+    }
+
+    function clearSig() {
+      const canvas = document.getElementById('sigPad');
+      if (sigCtx) sigCtx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function completeKeepsake() {
+      document.getElementById('keepsakeDone').classList.remove('hidden');
+      celebrate();
+      document.getElementById('lockBtn').classList.add('hidden');
+      document.getElementById('keepsakeSummary').textContent = L('keep');
+      document.getElementById('keepsakeDone').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  </script>
+</body>
+</html>
